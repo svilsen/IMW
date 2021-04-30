@@ -196,3 +196,37 @@ update_imw <- function(object, x_new) {
     return(res)
 }
 
+#' @title Plot of rolling statistics
+#' 
+#' @param x An imw-object.
+#' 
+#' @param ... Additional arguments passed to the internal plot functions.
+#' 
+#' @return NULL
+#' 
+#' @rdname plot.imw
+#' @method plot imw
+#'
+#' @export
+plot.imw <- function(x, ...) {
+    par(mfrow = c(2, 2), mar = c(5, 5, 0.5, 0.5))
+    plot(x$x, pch = 16, xlab = "t", ylab = expression("x"[" t"]), ...)
+    points(mean(x), pch = 16, col = "red", type = "l", lwd = 3)
+    
+    plot(variance(x), pch = 16, xlab = "t", ylab = expression("Variance(x"[" t "]*")"), ...)
+    abline(h = mean(variance(x), na.rm = TRUE), col = "red", lwd = 3)
+    
+    plot(skewness(x), pch = 16, xlab = "t", ylab = expression("Skewness(x"[" t "]*")"), ...)
+    abline(h = 0, col = "red", lwd = 3)
+    
+    plot(kurtosis(x), pch = 16, xlab = "t", ylab = expression("Kurtosis(x"[" t "]*")"), ...)
+    par(mfrow = c(1, 1), mar = c(6, 6, 2, 2))
+    
+    return(invisible(NULL))
+}
+
+
+
+
+
+

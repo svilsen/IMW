@@ -10,6 +10,8 @@
 #' 
 #' @importFrom Rcpp evalCpp
 #' 
+#' @importFrom graphics plot points abline
+#' 
 #' @useDynLib IMW
 #' 
 #' @name IMW
