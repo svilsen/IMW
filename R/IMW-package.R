@@ -14,5 +14,5 @@
 #' 
 #' @useDynLib IMW
 #' 
-#' @name IMW
+#' @name IMW-package
 NULL
