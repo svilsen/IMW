@@ -3,11 +3,15 @@
 \docType{package}
 \encoding{UTF-8}
 \name{IMW-package}
+\alias{IMW}
 \alias{IMW-package}
-\title{Incremental Moment Windows}
+\title{IMW: Incremental Moment Windows}
 \description{
+Functions for incrementally updating moments of observed data in a specified window.
+
 Functions for incrementally updating moments of observed data in a specified window.
 }
 \author{
 Søren B. Vilsen <svilsen@math.aau.dk>
 }
+\keyword{internal}

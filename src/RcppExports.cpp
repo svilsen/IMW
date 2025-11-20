@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // imw_cpp
 Rcpp::List imw_cpp(const arma::colvec& x, const int& k);
 RcppExport SEXP _IMW_imw_cpp(SEXP xSEXP, SEXP kSEXP) {

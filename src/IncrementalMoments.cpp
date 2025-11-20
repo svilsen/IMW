@@ -188,17 +188,20 @@ Rcpp::List imw_update_cpp(const arma::colvec & x, const int & k, const arma::col
     arma::mat R(N - k, 4);
     for (int n = k; n < N; n++) {
         double x_n = x[n];
+        //
         total.add(x_n);
+        IncrementalMoments delta_ = total - lagged;
         
+        //
         double x_n_k = x[n - k];
         lagged.add(x_n_k);
+        IncrementalMoments delta = total - lagged;
         
-        IncrementalMoments difference = total - lagged;
-        
-        R(n - k, 0) = difference.mean();
-        R(n - k, 1) = difference.variance();
-        R(n - k, 2) = difference.skewness(); 
-        R(n - k, 3) = difference.kurtosis();
+        //
+        R(n - k, 0) = delta.mean();
+        R(n - k, 1) = delta.variance();
+        R(n - k, 2) = delta.skewness(); 
+        R(n - k, 3) = delta.kurtosis();
     }
     
     //
