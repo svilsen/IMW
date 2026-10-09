@@ -3,10 +3,9 @@ Type: Package
 Title: Incremental Moment Windows
 Version: 1.1
 Date: 2026-10-08
-Author: Søren B. Vilsen
-Maintainer: Søren B. Vilsen <svilsen@math.aau.dk>
+Authors@R: person(given = c("Søren", "B."), family = "Vilsen", role = c("aut", "cre"), email = "svilsen@math.aau.dk") 
 Description: Functions for incrementally calculating and updating the moments of observed data within a fixed rolling window.
-License: MIT + LICENSE
+License: MIT + file LICENSE
 Encoding: UTF-8
 Imports: Rcpp (>= 1.0.4.6)
 LinkingTo: Rcpp, RcppArmadillo

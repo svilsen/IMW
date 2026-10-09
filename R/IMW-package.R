@@ -6,8 +6,8 @@
 #' @encoding UTF-8
 #' 
 #' @importFrom Rcpp evalCpp
-#' 
-#' @importFrom graphics plot points abline
+#' @importFrom utils tail
+#' @importFrom graphics plot points abline par
 #' 
 #' @useDynLib IMW
 #' 

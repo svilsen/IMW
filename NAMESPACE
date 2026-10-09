@@ -14,7 +14,9 @@ export(variance)
 importFrom(Rcpp,evalCpp)
 importFrom(graphics,
   abline,
+  par,
   plot,
   points
 )
+importFrom(utils,tail)
 useDynLib(IMW)

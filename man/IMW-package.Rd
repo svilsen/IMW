@@ -9,4 +9,13 @@
 \description{
 Functions for incrementally calculating and updating the moments of observed data within a fixed rolling window.
 }
+\author{
+\strong{Maintainer}: Søren B. Vilsen \email{svilsen@math.aau.dk}
+
+Authors:
+\itemize{
+  \item Søren B. Vilsen \email{svilsen@math.aau.dk}
+}
+
+}
 \keyword{internal}

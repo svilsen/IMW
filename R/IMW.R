@@ -37,6 +37,15 @@ imw <- function(x, k) {
     return(res)
 }
 
+#' @title Mean
+#' 
+#' @description Computes the mean.
+#' 
+#' @param x An \link{imw} object.
+#' @param ... Additional arguments; not used in this instance.
+#' 
+#' @return The estimated mean.
+#' 
 #' @rdname mean.imw
 #' @method mean imw
 #' 
@@ -46,11 +55,33 @@ mean.imw <- function(x, ...) {
     return(res)
 }
 
+#' @title Variance
+#' 
+#' @description Computes the variance.
+#' 
+#' @param x An \link{imw} object.
+#' @param ... Additional arguments, see details.
+#' 
+#' @details The only additional argument is \code{type} which takes the values \code{1} and \code{2} corresponding to the population and sample variance, respectively.  
+#' 
+#' @return The estimated variance.
+#' 
 #' @export
 variance <- function(x, ...) {
     UseMethod("variance")
 }
 
+#' @title Variance
+#' 
+#' @description Computes the variance.
+#' 
+#' @param x An \link{imw} object.
+#' @param ... Additional arguments, see details.
+#' 
+#' @details The only additional argument is \code{type} which takes the values \code{1} and \code{2} corresponding to the population and sample variance, respectively.  
+#' 
+#' @return The estimated variance.
+#' 
 #' @rdname variance.imw
 #' @method variance imw
 #' 
@@ -75,11 +106,37 @@ variance.imw <- function(x, ...) {
     return(res)
 }
 
+#' @title Skewness
+#' 
+#' @description Computes the skewness.
+#' 
+#' @param x An \link{imw} object.
+#' @param ... Additional arguments, see details.
+#' 
+#' @details The only additional argument is \code{type} which takes the values \code{1, 2, 3}, as discussed by Joanes and Gill (1998).  
+#' 
+#' @return The estimated skewness.
+#' 
+#' @references D. N. Joanes and C. A. Gill (1998), Comparing measures of sample skewness and kurtosis. The Statistician, 47, 183–189.
+#' 
 #' @export
 skewness <- function(x, ...) {
     UseMethod("skewness")
 }
 
+#' @title Skewness
+#' 
+#' @description Computes the skewness.
+#' 
+#' @param x An \link{imw} object.
+#' @param ... Additional arguments, see details.
+#' 
+#' @details The only additional argument is \code{type} which takes the values \code{1, 2, 3}, as discussed by Joanes and Gill (1998).  
+#' 
+#' @return The estimated skewness.
+#' 
+#' @references D. N. Joanes and C. A. Gill (1998), Comparing measures of sample skewness and kurtosis. The Statistician, 47, 183–189.
+#' 
 #' @rdname skewness.imw
 #' @method skewness imw
 #' 
@@ -116,11 +173,37 @@ skewness.imw <- function(x, ...) {
     return(res)
 }
 
+#' @title Kurtosis
+#' 
+#' @description Computes the kurtosis.
+#' 
+#' @param x An \link{imw} object.
+#' @param ... Additional arguments, see details.
+#' 
+#' @details The only additional argument is \code{type} which takes the values \code{1, 2, 3}, as discussed by Joanes and Gill (1998).  
+#' 
+#' @return The estimated kurtosis.
+#' 
+#' @references D. N. Joanes and C. A. Gill (1998), Comparing measures of sample skewness and kurtosis. The Statistician, 47, 183–189.
+#' 
 #' @export
 kurtosis <- function(x, ...) {
     UseMethod("kurtosis")
 }
 
+#' @title Kurtosis
+#' 
+#' @description Computes the kurtosis.
+#' 
+#' @param x An \link{imw} object.
+#' @param ... Additional arguments, see details.
+#' 
+#' @details The only additional argument is \code{type} which takes the values \code{1, 2, 3}, as discussed by Joanes and Gill (1998).  
+#' 
+#' @return The estimated kurtosis.
+#' 
+#' @references D. N. Joanes and C. A. Gill (1998), Comparing measures of sample skewness and kurtosis. The Statistician, 47, 183–189.
+#' 
 #' @rdname kurtosis.imw
 #' @method kurtosis imw
 #'
@@ -158,8 +241,17 @@ kurtosis.imw <- function(x, ...) {
     return(res)
 }
 
+#' @title Converts to matrix
+#' 
+#' @description Converts an object of \link{imw} to matrix.
+#' 
+#' @param x An \link{imw} object.
+#' @param ... Additional arguments; not used in this instance.
+#' 
 #' @rdname as.matrix.imw
 #' @method as.matrix imw
+#' 
+#' @return A matrix.
 #'
 #' @export
 as.matrix.imw <- function(x, ...) {
