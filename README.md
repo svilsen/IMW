@@ -44,6 +44,7 @@ umw <- uimw(mw, y)
 #
 plot(umw)
 ```
+<img width="1645" height="751" alt="Rplot" src="https://github.com/user-attachments/assets/ee1bae4d-c9ce-4468-b0e6-411fddb98f8e" />
 
 ## License
 
