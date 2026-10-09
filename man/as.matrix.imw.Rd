@@ -17,3 +17,13 @@ A matrix.
 \description{
 Converts an object of \link{imw} to matrix.
 }
+\examples{
+N <- 100
+x <- cumsum(rnorm(N))
+
+k <- 10
+mw <- imw(x, k)
+
+as.matrix(mw)
+
+}

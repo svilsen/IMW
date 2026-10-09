@@ -3,7 +3,7 @@ Type: Package
 Title: Incremental Moment Windows
 Version: 1.1
 Date: 2026-10-08
-Authors@R: person(given = c("Søren", "B."), family = "Vilsen", role = c("aut", "cre"), email = "svilsen@math.aau.dk") 
+Authors@R: person(given = c("Søren", "B."), family = "Vilsen", role = c("aut", "cre"), email = "svilsen@mp.aau.dk") 
 Description: Functions for incrementally calculating and updating the moments of observed data within a fixed rolling window.
 License: MIT + file LICENSE
 Encoding: UTF-8

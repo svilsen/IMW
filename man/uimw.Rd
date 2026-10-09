@@ -18,15 +18,17 @@ An object of class \code{imw}.
 Update an object of class \link{imw} with new information.
 }
 \examples{
+# Initial data
 N <- 100
-N_new <- 20
+x <- cumsum(rnorm(N))
+
 k <- 10
+mw <- imw(x, k)
 
-y <- cumsum(rnorm(N + N_new))
-x <- head(y, N)
-x_new <- tail(y, N_new)
+# Additional data
+M <- 20
+y <- cumsum(c(tail(x, 1), rnorm(M)))[-1]
 
-imw_x <- imw(x, k)
-uimw(imw_x, x_new = x_new)
+uimw(mw, y)
 
 }

@@ -18,7 +18,17 @@ The estimated kurtosis.
 Computes the kurtosis.
 }
 \details{
-The only additional argument is \code{type} which takes the values \code{1, 2, 3}, as discussed by Joanes and Gill (1998).
+The only additional argument is \code{type} which takes the values \code{1, 2, 3}, corresponding to the three methods discussed by Joanes and Gill (1998).
+}
+\examples{
+N <- 100
+x <- cumsum(rnorm(N))
+
+k <- 10
+mw <- imw(x, k)
+
+kurtosis(mw)
+
 }
 \references{
 D. N. Joanes and C. A. Gill (1998), Comparing measures of sample skewness and kurtosis. The Statistician, 47, 183–189.

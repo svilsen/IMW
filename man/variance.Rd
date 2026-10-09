@@ -20,3 +20,13 @@ Computes the variance.
 \details{
 The only additional argument is \code{type} which takes the values \code{1} and \code{2} corresponding to the population and sample variance, respectively.
 }
+\examples{
+N <- 100
+x <- cumsum(rnorm(N))
+
+k <- 10
+mw <- imw(x, k)
+
+variance(mw)
+
+}

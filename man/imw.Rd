@@ -25,9 +25,10 @@ An object of class \code{imw}, containing the following:
 Incrementally updated moments for a fixed window size.
 }
 \examples{
-x <- cumsum(rnorm(100))
-k <- 10
+N <- 100
+x <- cumsum(rnorm(N))
 
+k <- 10
 imw(x, k)
  
 }

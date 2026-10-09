@@ -14,3 +14,13 @@
 \description{
 Plot of rolling statistics
 }
+\examples{
+N <- 100
+x <- cumsum(rnorm(N))
+
+k <- 10
+mw <- imw(x, k)
+
+plot(mw)
+
+}

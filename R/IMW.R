@@ -14,9 +14,10 @@
 #'     \item{\code{k}}{The size of the window used to calculate the four moments.}
 #' }
 #'  
-#' @examples x <- cumsum(rnorm(100))
-#' k <- 10
+#' @examples N <- 100
+#' x <- cumsum(rnorm(N))
 #' 
+#' k <- 10
 #' imw(x, k)
 #'  
 #' @export 
@@ -49,6 +50,14 @@ imw <- function(x, k) {
 #' @rdname mean.imw
 #' @method mean imw
 #' 
+#' @examples N <- 100
+#' x <- cumsum(rnorm(N))
+#' 
+#' k <- 10
+#' mw <- imw(x, k)
+#' 
+#' mean(mw)
+#' 
 #' @export
 mean.imw <- function(x, ...) {
     res <- x$stats[, 1]
@@ -65,6 +74,14 @@ mean.imw <- function(x, ...) {
 #' @details The only additional argument is \code{type} which takes the values \code{1} and \code{2} corresponding to the population and sample variance, respectively.  
 #' 
 #' @return The estimated variance.
+#' 
+#' @examples N <- 100
+#' x <- cumsum(rnorm(N))
+#' 
+#' k <- 10
+#' mw <- imw(x, k)
+#' 
+#' variance(mw)
 #' 
 #' @export
 variance <- function(x, ...) {
@@ -84,6 +101,14 @@ variance <- function(x, ...) {
 #' 
 #' @rdname variance.imw
 #' @method variance imw
+#' 
+#' @examples N <- 100
+#' x <- cumsum(rnorm(N))
+#' 
+#' k <- 10
+#' mw <- imw(x, k)
+#' 
+#' variance(mw)
 #' 
 #' @export
 variance.imw <- function(x, ...) {
@@ -113,11 +138,19 @@ variance.imw <- function(x, ...) {
 #' @param x An \link{imw} object.
 #' @param ... Additional arguments, see details.
 #' 
-#' @details The only additional argument is \code{type} which takes the values \code{1, 2, 3}, as discussed by Joanes and Gill (1998).  
+#' @details The only additional argument is \code{type} which takes the values \code{1, 2, 3}, corresponding to the three methods discussed by Joanes and Gill (1998).  
 #' 
 #' @return The estimated skewness.
 #' 
 #' @references D. N. Joanes and C. A. Gill (1998), Comparing measures of sample skewness and kurtosis. The Statistician, 47, 183–189.
+#' 
+#' @examples N <- 100
+#' x <- cumsum(rnorm(N))
+#' 
+#' k <- 10
+#' mw <- imw(x, k)
+#' 
+#' skewness(mw)
 #' 
 #' @export
 skewness <- function(x, ...) {
@@ -131,7 +164,7 @@ skewness <- function(x, ...) {
 #' @param x An \link{imw} object.
 #' @param ... Additional arguments, see details.
 #' 
-#' @details The only additional argument is \code{type} which takes the values \code{1, 2, 3}, as discussed by Joanes and Gill (1998).  
+#' @details The only additional argument is \code{type} which takes the values \code{1, 2, 3}, corresponding to the three methods discussed by Joanes and Gill (1998).  
 #' 
 #' @return The estimated skewness.
 #' 
@@ -139,6 +172,14 @@ skewness <- function(x, ...) {
 #' 
 #' @rdname skewness.imw
 #' @method skewness imw
+#' 
+#' @examples N <- 100
+#' x <- cumsum(rnorm(N))
+#' 
+#' k <- 10
+#' mw <- imw(x, k)
+#' 
+#' skewness(mw)
 #' 
 #' @export
 skewness.imw <- function(x, ...) {
@@ -180,11 +221,19 @@ skewness.imw <- function(x, ...) {
 #' @param x An \link{imw} object.
 #' @param ... Additional arguments, see details.
 #' 
-#' @details The only additional argument is \code{type} which takes the values \code{1, 2, 3}, as discussed by Joanes and Gill (1998).  
+#' @details The only additional argument is \code{type} which takes the values \code{1, 2, 3}, corresponding to the three methods discussed by Joanes and Gill (1998).  
 #' 
 #' @return The estimated kurtosis.
 #' 
 #' @references D. N. Joanes and C. A. Gill (1998), Comparing measures of sample skewness and kurtosis. The Statistician, 47, 183–189.
+#' 
+#' @examples N <- 100
+#' x <- cumsum(rnorm(N))
+#' 
+#' k <- 10
+#' mw <- imw(x, k)
+#' 
+#' kurtosis(mw)
 #' 
 #' @export
 kurtosis <- function(x, ...) {
@@ -198,7 +247,7 @@ kurtosis <- function(x, ...) {
 #' @param x An \link{imw} object.
 #' @param ... Additional arguments, see details.
 #' 
-#' @details The only additional argument is \code{type} which takes the values \code{1, 2, 3}, as discussed by Joanes and Gill (1998).  
+#' @details The only additional argument is \code{type} which takes the values \code{1, 2, 3}, corresponding to the three methods discussed by Joanes and Gill (1998).  
 #' 
 #' @return The estimated kurtosis.
 #' 
@@ -206,6 +255,14 @@ kurtosis <- function(x, ...) {
 #' 
 #' @rdname kurtosis.imw
 #' @method kurtosis imw
+#' 
+#' @examples N <- 100
+#' x <- cumsum(rnorm(N))
+#' 
+#' k <- 10
+#' mw <- imw(x, k)
+#' 
+#' kurtosis(mw)
 #'
 #' @export
 kurtosis.imw <- function(x, ...) {
@@ -252,6 +309,14 @@ kurtosis.imw <- function(x, ...) {
 #' @method as.matrix imw
 #' 
 #' @return A matrix.
+#' 
+#' @examples N <- 100
+#' x <- cumsum(rnorm(N))
+#' 
+#' k <- 10
+#' mw <- imw(x, k)
+#' 
+#' as.matrix(mw)
 #'
 #' @export
 as.matrix.imw <- function(x, ...) {
@@ -269,16 +334,18 @@ as.matrix.imw <- function(x, ...) {
 #' 
 #' @return An object of class \code{imw}.
 #' 
-#' @examples N <- 100
-#' N_new <- 20
+#' @examples # Initial data
+#' N <- 100
+#' x <- cumsum(rnorm(N))
+#' 
 #' k <- 10
+#' mw <- imw(x, k)
 #' 
-#' y <- cumsum(rnorm(N + N_new))
-#' x <- head(y, N)
-#' x_new <- tail(y, N_new)
+#' # Additional data
+#' M <- 20
+#' y <- cumsum(c(tail(x, 1), rnorm(M)))[-1]
 #' 
-#' imw_x <- imw(x, k)
-#' uimw(imw_x, x_new = x_new)
+#' uimw(mw, y)
 #' 
 #' @export 
 uimw <- function(object, x_new) {
@@ -311,6 +378,14 @@ uimw <- function(object, x_new) {
 #' 
 #' @rdname plot.imw
 #' @method plot imw
+#' 
+#' @examples N <- 100
+#' x <- cumsum(rnorm(N))
+#' 
+#' k <- 10
+#' mw <- imw(x, k)
+#' 
+#' plot(mw)
 #'
 #' @export
 plot.imw <- function(x, ...) {
@@ -325,6 +400,7 @@ plot.imw <- function(x, ...) {
     abline(h = 0, col = "red", lwd = 3)
     
     plot(kurtosis(x), pch = 16, xlab = "t", ylab = expression("Kurtosis(x"[" t "]*")"), ...)
+    abline(h = 0, col = "red", lwd = 3)
     par(mfrow = c(1, 1), mar = c(6, 6, 2, 2))
     
     return(invisible(NULL))

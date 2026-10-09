@@ -17,3 +17,13 @@ The estimated mean.
 \description{
 Computes the mean.
 }
+\examples{
+N <- 100
+x <- cumsum(rnorm(N))
+
+k <- 10
+mw <- imw(x, k)
+
+mean(mw)
+
+}
