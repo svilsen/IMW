@@ -1,17 +1,17 @@
 #' @title Incremental Moment Windows
 #' 
-#' @description Incrementally updated moments for a fixed windows. 
+#' @description Incrementally updated moments for a fixed window size. 
 #' 
-#' @param x A vector, or matrix with a single column, of new data.
-#' @param k A numeric indicating the lag/windows.
+#' @param x A vector of data.
+#' @param k A numeric defining the window size.
 #' 
 #' @return An object of class \code{imw}, containing the following:
 #' \describe{
-#'     \item{\code{stats}}{A matrix whose columns contain the rolling mean, variance, skewness, and kurtosis.}
-#'     \item{\code{totalMoments}}{The incremental moments calculated using all the supplied information.}
-#'     \item{\code{windowMoments}}{The incremental moments calculated using the supplied information up until the beginning of the last window (need if more information is added later, using the \link{update_imw} function).}
-#'     \item{\code{x}}{A matrix of the data supplied to the function (gets updated when using the \link{update_imw} function).}
-#'     \item{\code{k}}{The size of the window used to calculate the statistics.}
+#'     \item{\code{stats}}{A matrix which columns contain the rolling mean, variance, skewness, and kurtosis.}
+#'     \item{\code{total}}{The incremental moments calculated using the supplied information.}
+#'     \item{\code{window}}{The incremental moments calculated using the supplied information up until the beginning of the last window (need if more information is recieved and the moments needs to be updated, see \link{uimw} function).}
+#'     \item{\code{x}}{A matrix of the supplied data (gets replaced when using the \link{uimw} function).}
+#'     \item{\code{k}}{The size of the window used to calculate the four moments.}
 #' }
 #'  
 #' @examples x <- cumsum(rnorm(100))
@@ -37,7 +37,9 @@ imw <- function(x, k) {
     return(res)
 }
 
-
+#' @rdname mean.imw
+#' @method mean imw
+#' 
 #' @export
 mean.imw <- function(x, ...) {
     res <- x$stats[, 1]
@@ -49,6 +51,9 @@ variance <- function(x, ...) {
     UseMethod("variance")
 }
 
+#' @rdname variance.imw
+#' @method variance imw
+#' 
 #' @export
 variance.imw <- function(x, ...) {
     dots <- list(...)
@@ -75,6 +80,9 @@ skewness <- function(x, ...) {
     UseMethod("skewness")
 }
 
+#' @rdname skewness.imw
+#' @method skewness imw
+#' 
 #' @export
 skewness.imw <- function(x, ...) {
     dots <- list(...)
@@ -113,6 +121,9 @@ kurtosis <- function(x, ...) {
     UseMethod("kurtosis")
 }
 
+#' @rdname kurtosis.imw
+#' @method kurtosis imw
+#'
 #' @export
 kurtosis.imw <- function(x, ...) {
     dots <- list(...)
@@ -147,6 +158,9 @@ kurtosis.imw <- function(x, ...) {
     return(res)
 }
 
+#' @rdname as.matrix.imw
+#' @method as.matrix imw
+#'
 #' @export
 as.matrix.imw <- function(x, ...) {
     res <- x$stats
@@ -154,12 +168,12 @@ as.matrix.imw <- function(x, ...) {
     return(res)
 }
 
-#' @title Update
+#' @title Update Incremental Moment Windows
 #' 
 #' @description Update an object of class \link{imw} with new information.
 #' 
 #' @param object An object of class \code{imw}.
-#' @param x_new A vector, or single column matrix, of new data.
+#' @param x_new A vector, or column matrix, of new information.
 #' 
 #' @return An object of class \code{imw}.
 #' 
@@ -172,11 +186,10 @@ as.matrix.imw <- function(x, ...) {
 #' x_new <- tail(y, N_new)
 #' 
 #' imw_x <- imw(x, k)
-#' 
-#' update_imw(imw_x, x_new = x_new)
+#' uimw(imw_x, x_new = x_new)
 #' 
 #' @export 
-update_imw <- function(object, x_new) {
+uimw <- function(object, x_new) {
     if (!is.matrix(x_new)) {
         x_new <- matrix(x_new, ncol = 1)
     }
@@ -186,7 +199,7 @@ update_imw <- function(object, x_new) {
     k <- object$k
     
     x_c <- rbind(tail(x, k), x_new)
-    res <- imw_update_cpp(x = x_c, k = k, t = object$totalMoments, l = object$windowMoments)
+    res <- uimw_cpp(x = x_c, k = k, t = object$totalMoments, l = object$windowMoments)
     
     res$stats <- rbind(object$stats, res$stats)
     res$x <- rbind(x, x_new)

@@ -67,8 +67,6 @@ public:
     }
 };
 
-
-//
 IncrementalMoments operator+(const IncrementalMoments A, const IncrementalMoments B) {
     //
     IncrementalMoments C;
@@ -177,7 +175,7 @@ Rcpp::List imw_cpp(const arma::colvec & x, const int & k) {
 } 
 
 //[[Rcpp::export()]] 
-Rcpp::List imw_update_cpp(const arma::colvec & x, const int & k, const arma::colvec & t, const arma::colvec & l) {
+Rcpp::List uimw_cpp(const arma::colvec & x, const int & k, const arma::colvec & t, const arma::colvec & l) {
     //
     int N = x.size();
     
