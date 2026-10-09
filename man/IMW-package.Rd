@@ -7,11 +7,6 @@
 \alias{IMW-package}
 \title{IMW: Incremental Moment Windows}
 \description{
-Functions for incrementally updating moments of observed data in a specified window.
-
-Functions for incrementally updating moments of observed data in a specified window.
-}
-\author{
-Søren B. Vilsen <svilsen@math.aau.dk>
+Functions for incrementally calculating and updating the moments of observed data within a fixed rolling window.
 }
 \keyword{internal}

@@ -9,10 +9,12 @@ S3method(variance,imw)
 export(imw)
 export(kurtosis)
 export(skewness)
-export(update_imw)
+export(uimw)
 export(variance)
 importFrom(Rcpp,evalCpp)
-importFrom(graphics,abline)
-importFrom(graphics,plot)
-importFrom(graphics,points)
+importFrom(graphics,
+  abline,
+  plot,
+  points
+)
 useDynLib(IMW)

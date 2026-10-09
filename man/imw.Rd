@@ -7,22 +7,22 @@
 imw(x, k)
 }
 \arguments{
-\item{x}{A vector, or matrix with a single column, of new data.}
+\item{x}{A vector of data.}
 
-\item{k}{A numeric indicating the lag/windows.}
+\item{k}{A numeric defining the window size.}
 }
 \value{
 An object of class \code{imw}, containing the following:
 \describe{
-    \item{\code{stats}}{A matrix whose columns contain the rolling mean, variance, skewness, and kurtosis.}
-    \item{\code{totalMoments}}{The incremental moments calculated using all the supplied information.}
-    \item{\code{windowMoments}}{The incremental moments calculated using the supplied information up until the beginning of the last window (need if more information is added later, using the \link{update_imw} function).}
-    \item{\code{x}}{A matrix of the data supplied to the function (gets updated when using the \link{update_imw} function).}
-    \item{\code{k}}{The size of the window used to calculate the statistics.}
+    \item{\code{stats}}{A matrix which columns contain the rolling mean, variance, skewness, and kurtosis.}
+    \item{\code{total}}{The incremental moments calculated using the supplied information.}
+    \item{\code{window}}{The incremental moments calculated using the supplied information up until the beginning of the last window (need if more information is recieved and the moments needs to be updated, see \link{uimw} function).}
+    \item{\code{x}}{A matrix of the supplied data (gets replaced when using the \link{uimw} function).}
+    \item{\code{k}}{The size of the window used to calculate the four moments.}
 }
 }
 \description{
-Incrementally updated moments for a fixed windows.
+Incrementally updated moments for a fixed window size.
 }
 \examples{
 x <- cumsum(rnorm(100))

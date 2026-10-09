@@ -23,9 +23,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// imw_update_cpp
-Rcpp::List imw_update_cpp(const arma::colvec& x, const int& k, const arma::colvec& t, const arma::colvec& l);
-RcppExport SEXP _IMW_imw_update_cpp(SEXP xSEXP, SEXP kSEXP, SEXP tSEXP, SEXP lSEXP) {
+// uimw_cpp
+Rcpp::List uimw_cpp(const arma::colvec& x, const int& k, const arma::colvec& t, const arma::colvec& l);
+RcppExport SEXP _IMW_uimw_cpp(SEXP xSEXP, SEXP kSEXP, SEXP tSEXP, SEXP lSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -33,14 +33,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const int& >::type k(kSEXP);
     Rcpp::traits::input_parameter< const arma::colvec& >::type t(tSEXP);
     Rcpp::traits::input_parameter< const arma::colvec& >::type l(lSEXP);
-    rcpp_result_gen = Rcpp::wrap(imw_update_cpp(x, k, t, l));
+    rcpp_result_gen = Rcpp::wrap(uimw_cpp(x, k, t, l));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_IMW_imw_cpp", (DL_FUNC) &_IMW_imw_cpp, 2},
-    {"_IMW_imw_update_cpp", (DL_FUNC) &_IMW_imw_update_cpp, 4},
+    {"_IMW_uimw_cpp", (DL_FUNC) &_IMW_uimw_cpp, 4},
     {NULL, NULL, 0}
 };
 

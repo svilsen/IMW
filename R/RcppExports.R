@@ -5,7 +5,7 @@ imw_cpp <- function(x, k) {
     .Call('_IMW_imw_cpp', PACKAGE = 'IMW', x, k)
 }
 
-imw_update_cpp <- function(x, k, t, l) {
-    .Call('_IMW_imw_update_cpp', PACKAGE = 'IMW', x, k, t, l)
+uimw_cpp <- function(x, k, t, l) {
+    .Call('_IMW_uimw_cpp', PACKAGE = 'IMW', x, k, t, l)
 }
 
