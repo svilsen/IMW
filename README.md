@@ -39,6 +39,7 @@ mw <- imw(x, k)
 #
 plot(mw, xlim = c(1, 150))
 ```
+<img width="1533" height="773" alt="Rplot01" src="https://github.com/user-attachments/assets/7df6a8df-26c1-426c-9e99-b799492ce0b0" />
 
 Subsequently, a new batch of 50 observations are observed, and the rolling statistics are updated given this additional information.
 ```r
@@ -53,6 +54,7 @@ umw <- uimw(mw, y)
 #
 plot(umw, xlim = c(1, 150))
 ```
+<img width="1533" height="779" alt="Rplot02" src="https://github.com/user-attachments/assets/236ba467-fc42-44ae-9bda-505ec0d7947d" />
 
 ## License
 
