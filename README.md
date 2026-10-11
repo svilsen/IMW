@@ -19,10 +19,13 @@ remotes::install_github("svilsen/IMW")
 ```
 
 ## Usage
-In the following, a series of 100 observations is generated randomly, and the rolling mean, variance, skewness, and kurtosis are calculated using a window size of 10. Subsequently, a new batch of 20 observations are observed, and the rolling statistics are updated given this additional information.
+A series of 100 observations is generated randomly, and the rolling mean, variance, skewness, and kurtosis are calculated using a window size of 10. 
 
 ```r
 ## Initial set-up
+# 
+set.seed(1234)
+
 # Observed data
 N <- 100
 x <- cumsum(rnorm(N))
@@ -33,18 +36,23 @@ k <- 10
 # Calculating rolling statistics using window size 'k'
 mw <- imw(x, k)
 
+#
+plot(mw, xlim = c(1, 150))
+```
+
+Subsequently, a new batch of 50 observations are observed, and the rolling statistics are updated given this additional information.
+```r
 ## Updating moments
 # Additional data
-M <- 20
+M <- 50
 y <- cumsum(c(tail(x, 1), rnorm(M)))[-1]
 
 # Update the moments using new information
 umw <- uimw(mw, y)
 
 #
-plot(umw)
+plot(umw, xlim = c(1, 150))
 ```
-<img width="1645" height="751" alt="Rplot" src="https://github.com/user-attachments/assets/ee1bae4d-c9ce-4468-b0e6-411fddb98f8e" />
 
 ## License
 
