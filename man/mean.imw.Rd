@@ -2,20 +2,20 @@
 % Please edit documentation in R/IMW.R
 \name{mean.imw}
 \alias{mean.imw}
-\title{Mean}
+\title{Rolling Mean}
 \usage{
 \method{mean}{imw}(x, ...)
 }
 \arguments{
-\item{x}{An \link{imw} object.}
+\item{x}{An \link{imw-object}.}
 
 \item{...}{Additional arguments; not used in this instance.}
 }
 \value{
-The estimated mean.
+The estimated rolling mean.
 }
 \description{
-Computes the mean.
+Returns the rolling mean of an \link{imw-object}.
 }
 \examples{
 N <- 100

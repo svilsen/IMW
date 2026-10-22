@@ -2,20 +2,20 @@
 % Please edit documentation in R/IMW.R
 \name{skewness}
 \alias{skewness}
-\title{Skewness}
+\title{Rolling Skewness}
 \usage{
 skewness(x, ...)
 }
 \arguments{
-\item{x}{An \link{imw} object.}
+\item{x}{An \link{imw-object}.}
 
 \item{...}{Additional arguments, see details.}
 }
 \value{
-The estimated skewness.
+The estimated rolling skewness.
 }
 \description{
-Computes the skewness.
+Returns the rolling skewness of an \link{imw-object}.
 }
 \details{
 The only additional argument is \code{type} which takes the values \code{1, 2, 3}, corresponding to the three methods discussed by Joanes and Gill (1998).

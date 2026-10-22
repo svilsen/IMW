@@ -2,20 +2,20 @@
 % Please edit documentation in R/IMW.R
 \name{variance.imw}
 \alias{variance.imw}
-\title{Variance}
+\title{Rolling Variance}
 \usage{
 \method{variance}{imw}(x, ...)
 }
 \arguments{
-\item{x}{An \link{imw} object.}
+\item{x}{An \link{imw-object}.}
 
 \item{...}{Additional arguments, see details.}
 }
 \value{
-The estimated variance.
+The estimated rolling variance.
 }
 \description{
-Computes the variance.
+Returns the rolling variance of an \link{imw-object}.
 }
 \details{
 The only additional argument is \code{type} which takes the values \code{1} and \code{2} corresponding to the population and sample variance, respectively.

@@ -2,20 +2,20 @@
 % Please edit documentation in R/IMW.R
 \name{as.matrix.imw}
 \alias{as.matrix.imw}
-\title{Converts to matrix}
+\title{Matrix Conversion}
 \usage{
 \method{as.matrix}{imw}(x, ...)
 }
 \arguments{
-\item{x}{An \link{imw} object.}
+\item{x}{An \link{imw-object}.}
 
 \item{...}{Additional arguments; not used in this instance.}
 }
 \value{
-A matrix.
+A numeric matrix of rolling statistics.
 }
 \description{
-Converts an object of \link{imw} to matrix.
+Converts an object of \link{imw-object} to a matrix.
 }
 \examples{
 N <- 100

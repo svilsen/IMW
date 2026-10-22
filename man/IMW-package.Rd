@@ -7,7 +7,7 @@
 \alias{IMW-package}
 \title{IMW: Incremental Moment Windows}
 \description{
-Functions for incrementally calculating and updating the moments of observed data within a fixed rolling window.
+Computes rolling statistics, including the mean, variance, skewness, and kurtosis, over moving windows. The package uses incremental algorithms to efficiently update statistics as new observations arrive, supporting both online computation and batch processing for time-series analysis and streaming data applications. Implemented in C++, the package provides a high-performance, header-only implementation that facilitates direct integration into other packages.
 }
 \author{
 \strong{Maintainer}: Søren B. Vilsen \email{svilsen@mp.aau.dk}

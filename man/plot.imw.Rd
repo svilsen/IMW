@@ -7,12 +7,15 @@
 \method{plot}{imw}(x, ...)
 }
 \arguments{
-\item{x}{An imw-object.}
+\item{x}{An \link{imw-object}.}
 
 \item{...}{Additional arguments passed to the internal plot functions.}
 }
+\value{
+An invisible \code{NULL}.
+}
 \description{
-Plot of rolling statistics
+Shows the four rolling statistics of an \link{imw-object}.
 }
 \examples{
 N <- 100

@@ -1,19 +1,12 @@
 #' @title Incremental Moment Windows
 #' 
-#' @description Incrementally updated moments for a fixed window size. 
+#' @description Rolling estimates of moments given a fixed window size. 
 #' 
-#' @param x A vector of data.
-#' @param k A numeric defining the window size.
+#' @param x Vector, or column matrix: The data used to estimate the moments.
+#' @param k Numeric: The window size.
 #' 
-#' @return An object of class \code{imw}, containing the following:
-#' \describe{
-#'     \item{\code{stats}}{A matrix which columns contain the rolling mean, variance, skewness, and kurtosis.}
-#'     \item{\code{total}}{The incremental moments calculated using the supplied information.}
-#'     \item{\code{window}}{The incremental moments calculated using the supplied information up until the beginning of the last window (need if more information is recieved and the moments needs to be updated, see \link{uimw} function).}
-#'     \item{\code{x}}{A matrix of the supplied data (gets replaced when using the \link{uimw} function).}
-#'     \item{\code{k}}{The size of the window used to calculate the four moments.}
-#' }
-#'  
+#' @return An \link{imw-object}.
+#' 
 #' @examples N <- 100
 #' x <- cumsum(rnorm(N))
 #' 
@@ -22,30 +15,37 @@
 #'  
 #' @export 
 imw <- function(x, k) {
+    #
     if (!is.matrix(x)) {
         x <- matrix(x, ncol = 1)
     }
     
+    #
     if (!is.integer(k)) {
         k <- as.integer(k)
     }
     
+    #
     res <- imw_cpp(x, k)
-    res$x <- x
-    res$k <- k
     
+    #
+    res[["stats"]] <- do.call("cbind", res[["stats"]])
+    res[["x"]] <- x
+    res[["k"]] <- k
+    
+    #
     class(res) <- "imw"
     return(res)
 }
 
-#' @title Mean
+#' @title Rolling Mean
 #' 
-#' @description Computes the mean.
+#' @description Returns the rolling mean of an \link{imw-object}.
 #' 
-#' @param x An \link{imw} object.
+#' @param x An \link{imw-object}.
 #' @param ... Additional arguments; not used in this instance.
 #' 
-#' @return The estimated mean.
+#' @return The estimated rolling mean.
 #' 
 #' @rdname mean.imw
 #' @method mean imw
@@ -60,20 +60,20 @@ imw <- function(x, k) {
 #' 
 #' @export
 mean.imw <- function(x, ...) {
-    res <- x$stats[, 1]
+    res <- x[["stats"]][, 1]
     return(res)
 }
 
-#' @title Variance
+#' @title Rolling Variance
 #' 
-#' @description Computes the variance.
+#' @description Returns the rolling variance of an \link{imw-object}.
 #' 
-#' @param x An \link{imw} object.
+#' @param x An \link{imw-object}.
 #' @param ... Additional arguments, see details.
 #' 
 #' @details The only additional argument is \code{type} which takes the values \code{1} and \code{2} corresponding to the population and sample variance, respectively.  
 #' 
-#' @return The estimated variance.
+#' @return The estimated rolling variance.
 #' 
 #' @examples N <- 100
 #' x <- cumsum(rnorm(N))
@@ -88,16 +88,16 @@ variance <- function(x, ...) {
     UseMethod("variance")
 }
 
-#' @title Variance
+#' @title Rolling Variance
 #' 
-#' @description Computes the variance.
+#' @description Returns the rolling variance of an \link{imw-object}.
 #' 
-#' @param x An \link{imw} object.
+#' @param x An \link{imw-object}.
 #' @param ... Additional arguments, see details.
 #' 
 #' @details The only additional argument is \code{type} which takes the values \code{1} and \code{2} corresponding to the population and sample variance, respectively.  
 #' 
-#' @return The estimated variance.
+#' @return The estimated rolling variance.
 #' 
 #' @rdname variance.imw
 #' @method variance imw
@@ -120,27 +120,31 @@ variance.imw <- function(x, ...) {
         type <- dots$type
     }
     
+    m <- x[["stats"]][, 2]
     if (type == 1) {
-        res <- x$stats[, 2]
+        res <- m
     }
     else if (type == 2) {
-        k <- dim(x$k)[1]
-        res <- (k - 1) * x$stats[, 2] / k
+        k <- x[["k"]]
+        res <- (k - 1) * m / k
+    }
+    else {
+        stop("'type' has to be 1 or 2.")
     }
     
     return(res)
 }
 
-#' @title Skewness
+#' @title Rolling Skewness
 #' 
-#' @description Computes the skewness.
+#' @description Returns the rolling skewness of an \link{imw-object}.
 #' 
-#' @param x An \link{imw} object.
+#' @param x An \link{imw-object}.
 #' @param ... Additional arguments, see details.
 #' 
 #' @details The only additional argument is \code{type} which takes the values \code{1, 2, 3}, corresponding to the three methods discussed by Joanes and Gill (1998).  
 #' 
-#' @return The estimated skewness.
+#' @return The estimated rolling skewness.
 #' 
 #' @references D. N. Joanes and C. A. Gill (1998), Comparing measures of sample skewness and kurtosis. The Statistician, 47, 183–189.
 #' 
@@ -157,16 +161,16 @@ skewness <- function(x, ...) {
     UseMethod("skewness")
 }
 
-#' @title Skewness
+#' @title Rolling Skewness
 #' 
-#' @description Computes the skewness.
+#' @description Returns the rolling skewness of an \link{imw-object}.
 #' 
-#' @param x An \link{imw} object.
+#' @param x An \link{imw-object}.
 #' @param ... Additional arguments, see details.
 #' 
 #' @details The only additional argument is \code{type} which takes the values \code{1, 2, 3}, corresponding to the three methods discussed by Joanes and Gill (1998).  
 #' 
-#' @return The estimated skewness.
+#' @return The estimated rolling skewness.
 #' 
 #' @references D. N. Joanes and C. A. Gill (1998), Comparing measures of sample skewness and kurtosis. The Statistician, 47, 183–189.
 #' 
@@ -191,39 +195,39 @@ skewness.imw <- function(x, ...) {
         type <- dots$type
     }
     
+    m <- x[["stats"]][, 3]
+    k <- x[["k"]]
+        
     if (type == 1) {
-        res <- x$stats[, 3]
+        res <- m
     }
     else if (type == 2) {
-        k <- x$k
         if (k < 3) {
             stop("The window size 'k' needs to be at least 3.")
         }
         
-        res <- x$stats[, 3] * sqrt(k * (k - 1)) / (k - 2)
+        res <- m * sqrt(k * (k - 1)) / (k - 2)
     }
     else if (type == 3) {
-        k <- x$k
-        res <- x$stats[, 3] * (1.0 - 1.0 / k)^(3 / 2)
+        res <- m * (1.0 - 1.0 / k)^(3 / 2)
     }
     else {
-        stop("The supplied 'type' was not valid.")
+        stop("'type' has to be 1, 2, or 3.")
     }
-    
     
     return(res)
 }
 
-#' @title Kurtosis
+#' @title Rolling Kurtosis
 #' 
-#' @description Computes the kurtosis.
+#' @description Returns the rolling kurtosis of an \link{imw-object}.
 #' 
-#' @param x An \link{imw} object.
+#' @param x An \link{imw-object}.
 #' @param ... Additional arguments, see details.
 #' 
 #' @details The only additional argument is \code{type} which takes the values \code{1, 2, 3}, corresponding to the three methods discussed by Joanes and Gill (1998).  
 #' 
-#' @return The estimated kurtosis.
+#' @return The estimated rolling kurtosis.
 #' 
 #' @references D. N. Joanes and C. A. Gill (1998), Comparing measures of sample skewness and kurtosis. The Statistician, 47, 183–189.
 #' 
@@ -240,16 +244,16 @@ kurtosis <- function(x, ...) {
     UseMethod("kurtosis")
 }
 
-#' @title Kurtosis
+#' @title Rolling Kurtosis
 #' 
-#' @description Computes the kurtosis.
+#' @description Returns the rolling kurtosis of an \link{imw-object}.
 #' 
-#' @param x An \link{imw} object.
+#' @param x An \link{imw-object}.
 #' @param ... Additional arguments, see details.
 #' 
 #' @details The only additional argument is \code{type} which takes the values \code{1, 2, 3}, corresponding to the three methods discussed by Joanes and Gill (1998).  
 #' 
-#' @return The estimated kurtosis.
+#' @return The estimated rolling kurtosis.
 #' 
 #' @references D. N. Joanes and C. A. Gill (1998), Comparing measures of sample skewness and kurtosis. The Statistician, 47, 183–189.
 #' 
@@ -274,22 +278,22 @@ kurtosis.imw <- function(x, ...) {
         type <- dots$type
     }
     
+    m <- x[["stats"]][, 4]
+    k <- x[["k"]]
+    
     if (type == 1) {
-        res <- x$stats[, 4]
+        res <- m
     }
     else if (type == 2) {
-        k <- x$k
-        
         if (k < 4) {
             stop("The window size 'k' needs to be at least 4.")
         }
         
-        res <- ((k + 1) * x$stats[, 4] + 6.0) * (k - 1) / ((k - 2) * (k - 3))
+        res <- ((k + 1) * m + 6.0) * (k - 1) / ((k - 2) * (k - 3))
         
     }
     else if (type == 3) {
-        k <- x$k
-        res <- (x$stats[, 4] + 3) * (1.0 + 1.0 / k)^2 - 3.0
+        res <- (m + 3) * (1.0 + 1.0 / k)^2 - 3.0
     }
     else {
         stop("The supplied 'type' was not valid.")
@@ -298,17 +302,17 @@ kurtosis.imw <- function(x, ...) {
     return(res)
 }
 
-#' @title Converts to matrix
+#' @title Matrix Conversion
 #' 
-#' @description Converts an object of \link{imw} to matrix.
+#' @description Converts an object of \link{imw-object} to a matrix.
 #' 
-#' @param x An \link{imw} object.
+#' @param x An \link{imw-object}.
 #' @param ... Additional arguments; not used in this instance.
 #' 
 #' @rdname as.matrix.imw
 #' @method as.matrix imw
 #' 
-#' @return A matrix.
+#' @return A numeric matrix of rolling statistics.
 #' 
 #' @examples N <- 100
 #' x <- cumsum(rnorm(N))
@@ -320,19 +324,18 @@ kurtosis.imw <- function(x, ...) {
 #'
 #' @export
 as.matrix.imw <- function(x, ...) {
-    res <- x$stats
-    colnames(res) <- c("Mean", "Variance", "Skewness", "Kurtosis")
+    res <- x[["stats"]]
     return(res)
 }
 
 #' @title Update Incremental Moment Windows
 #' 
-#' @description Update an object of class \link{imw} with new information.
+#' @description Update an \link{imw-object} with new data.
 #' 
-#' @param object An object of class \code{imw}.
-#' @param x_new A vector, or column matrix, of new information.
+#' @param object An \link{imw-object}.
+#' @param xnew Vector, or column matrix: The new data used to update the estimated moments.
 #' 
-#' @return An object of class \code{imw}.
+#' @return An \link{imw-object}.
 #' 
 #' @examples # Initial data
 #' N <- 100
@@ -348,21 +351,22 @@ as.matrix.imw <- function(x, ...) {
 #' uimw(mw, y)
 #' 
 #' @export 
-uimw <- function(object, x_new) {
-    if (!is.matrix(x_new)) {
-        x_new <- matrix(x_new, ncol = 1)
+uimw <- function(object, xnew) {
+    if (!is.matrix(xnew)) {
+        xnew <- matrix(xnew, ncol = 1)
     }
     
-    N <- length(object$x)
-    x <- object$x
-    k <- object$k
+    x <- object[["x"]]
+    k <- object[["k"]]
+    N <- length(x)
     
-    x_c <- rbind(tail(x, k), x_new)
-    res <- uimw_cpp(x = x_c, k = k, t = object$totalMoments, l = object$windowMoments)
+    xc <- rbind(tail(x, k), xnew)
+    res <- uimw_cpp(x = xc, k = k, l = object[["lagged"]], t = object[["total"]])
     
-    res$stats <- rbind(object$stats, res$stats)
-    res$x <- rbind(x, x_new)
-    res$k <- k
+    res[["stats"]] <- do.call("cbind", res[["stats"]])
+    res[["stats"]] <- rbind(object[["stats"]], res[["stats"]])
+    res[["x"]] <- rbind(x, xnew)
+    res[["k"]] <- k
     
     class(res) <- "imw"
     return(res)
@@ -370,11 +374,12 @@ uimw <- function(object, x_new) {
 
 #' @title Plot of rolling statistics
 #' 
-#' @param x An imw-object.
+#' @description Shows the four rolling statistics of an \link{imw-object}.
 #' 
+#' @param x An \link{imw-object}.
 #' @param ... Additional arguments passed to the internal plot functions.
 #' 
-#' @return NULL
+#' @return An invisible \code{NULL}.
 #' 
 #' @rdname plot.imw
 #' @method plot imw
@@ -389,25 +394,33 @@ uimw <- function(object, x_new) {
 #'
 #' @export
 plot.imw <- function(x, ...) {
+    ##
+    #
+    oldpar <- par(no.readonly = TRUE) 
+    on.exit(par(oldpar))
+    
+    ##
+    #
     par(mfrow = c(2, 2), mar = c(5, 5, 0.5, 0.5))
-    plot(x$x, pch = 16, xlab = "t", ylab = expression("x"[" t"]), ...)
+    
+    #
+    plot(x[["x"]], pch = 16, xlab = "t", ylab = expression("x"[" t"]), ...)
     points(mean(x), pch = 16, col = "red", type = "l", lwd = 3)
     
+    #
     plot(variance(x), pch = 16, xlab = "t", ylab = expression("Variance(x"[" t "]*")"), ...)
     abline(h = mean(variance(x), na.rm = TRUE), col = "red", lwd = 3)
     
+    #
     plot(skewness(x), pch = 16, xlab = "t", ylab = expression("Skewness(x"[" t "]*")"), ...)
     abline(h = 0, col = "red", lwd = 3)
     
+    #
     plot(kurtosis(x), pch = 16, xlab = "t", ylab = expression("Kurtosis(x"[" t "]*")"), ...)
     abline(h = 0, col = "red", lwd = 3)
-    par(mfrow = c(1, 1), mar = c(6, 6, 2, 2))
     
+    ##
+    #
     return(invisible(NULL))
 }
-
-
-
-
-
 

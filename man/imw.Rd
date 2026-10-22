@@ -7,22 +7,15 @@
 imw(x, k)
 }
 \arguments{
-\item{x}{A vector of data.}
+\item{x}{Vector, or column matrix: The data used to estimate the moments.}
 
-\item{k}{A numeric defining the window size.}
+\item{k}{Numeric: The window size.}
 }
 \value{
-An object of class \code{imw}, containing the following:
-\describe{
-    \item{\code{stats}}{A matrix which columns contain the rolling mean, variance, skewness, and kurtosis.}
-    \item{\code{total}}{The incremental moments calculated using the supplied information.}
-    \item{\code{window}}{The incremental moments calculated using the supplied information up until the beginning of the last window (need if more information is recieved and the moments needs to be updated, see \link{uimw} function).}
-    \item{\code{x}}{A matrix of the supplied data (gets replaced when using the \link{uimw} function).}
-    \item{\code{k}}{The size of the window used to calculate the four moments.}
-}
+An \link{imw-object}.
 }
 \description{
-Incrementally updated moments for a fixed window size.
+Rolling estimates of moments given a fixed window size.
 }
 \examples{
 N <- 100

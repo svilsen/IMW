@@ -4,18 +4,18 @@
 \alias{uimw}
 \title{Update Incremental Moment Windows}
 \usage{
-uimw(object, x_new)
+uimw(object, xnew)
 }
 \arguments{
-\item{object}{An object of class \code{imw}.}
+\item{object}{An \link{imw-object}.}
 
-\item{x_new}{A vector, or column matrix, of new information.}
+\item{xnew}{Vector, or column matrix: The new data used to update the estimated moments.}
 }
 \value{
-An object of class \code{imw}.
+An \link{imw-object}.
 }
 \description{
-Update an object of class \link{imw} with new information.
+Update an \link{imw-object} with new data.
 }
 \examples{
 # Initial data

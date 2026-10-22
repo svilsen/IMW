@@ -2,20 +2,20 @@
 % Please edit documentation in R/IMW.R
 \name{kurtosis.imw}
 \alias{kurtosis.imw}
-\title{Kurtosis}
+\title{Rolling Kurtosis}
 \usage{
 \method{kurtosis}{imw}(x, ...)
 }
 \arguments{
-\item{x}{An \link{imw} object.}
+\item{x}{An \link{imw-object}.}
 
 \item{...}{Additional arguments, see details.}
 }
 \value{
-The estimated kurtosis.
+The estimated rolling kurtosis.
 }
 \description{
-Computes the kurtosis.
+Returns the rolling kurtosis of an \link{imw-object}.
 }
 \details{
 The only additional argument is \code{type} which takes the values \code{1, 2, 3}, corresponding to the three methods discussed by Joanes and Gill (1998).
