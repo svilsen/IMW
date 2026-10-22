@@ -3,13 +3,12 @@ The `IMW`-package implements a method for calculating the rolling statistics mea
 
 ## Installation
 
-The `IMW`-package depends on `R` (>= 4.0.1), `Rcpp` (>= 1.0.4.6), and `RcppArmadillo`. As the package is not available on CRAN, `remotes` is needed to install the package from github. 
+The `IMW`-package depends on `R` (>= 4.0.1) and `Rcpp` (>= 1.0.4.6). As the package is not available on CRAN, `remotes` is needed to install the package from github. 
 
 From R, run the following commands:  
 
 ```r
 install.packages("Rcpp")
-install.packages("RcppArmadillo")
 
 if (!requireNamespace("remotes", quietly = TRUE)) {
     install.packages("remotes")
