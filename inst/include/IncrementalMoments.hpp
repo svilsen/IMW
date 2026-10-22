@@ -6,6 +6,7 @@
 
 //
 namespace IMW {
+    //
     class IncrementalMoments {
     public:
         // Data
@@ -63,6 +64,7 @@ namespace IMW {
         }
     };
     
+    //
     IncrementalMoments operator+(const IncrementalMoments A, const IncrementalMoments B) {
         //
         IncrementalMoments C;
@@ -89,7 +91,7 @@ namespace IMW {
         return C;
     }
     
-    
+    //
     IncrementalMoments operator-(const IncrementalMoments A, const IncrementalMoments B) {
         IncrementalMoments C;
         

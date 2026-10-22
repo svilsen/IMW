@@ -1,12 +1,12 @@
 Package: IMW
 Type: Package
 Title: Incremental Moment Windows
-Version: 1.1.1
+Version: 1.1
 Date: 2026-10-08
 Authors@R: person(given = c("Søren", "B."), family = "Vilsen", role = c("aut", "cre"), email = "svilsen@mp.aau.dk") 
-Description: Functions for incrementally calculating and updating the moments of observed data within a fixed rolling window.
+Description: Computes rolling statistics, including the mean, variance, skewness, and kurtosis, over moving windows. The package uses incremental algorithms to efficiently update statistics as new observations arrive, supporting both online computation and batch processing for time-series analysis and streaming data applications. Implemented in C++, the package provides a high-performance, header-only implementation that facilitates direct integration into other packages.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Imports: Rcpp (>= 1.0.4.6)
-LinkingTo: Rcpp, RcppArmadillo
+LinkingTo: Rcpp
 Config/roxygen2/version: 8.1.0
